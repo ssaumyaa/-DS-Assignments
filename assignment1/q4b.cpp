@@ -5,6 +5,7 @@ void createArray(int &r, int &c, int array[][20]){
     cin>>r;
     cout << "enter number of columns : "<<endl;
     cin>>c;
+    cout << "enter elements of the array";
     for(int i = 0; i<r; i++){
         for(int j=0; j<c; j++){
             cin>>array[i][j];
