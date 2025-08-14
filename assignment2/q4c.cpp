@@ -10,11 +10,6 @@ void displayString(char str[]){
     cout << str;
 }
 
-void swap(char &a, char &b){
-    char temp = a;
-    a = b;
-    b = temp;
-}
 int findSize(char str[], int &size){
     int i=0;
     while(str[i] != '\0'){
