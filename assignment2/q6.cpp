@@ -103,8 +103,22 @@ void sortMatrix(int nonzero, int matrix[][3]){
         }
     }
 }
-void multiplication(int mat1[20][3], int mat2[20][3]){
+void multiplication(int mat1[][3], int mat2[][3], int multi[][3]){
+    int k=0;
+    if(mat1[0][1] == mat2[0][0]){
+        multi[0][0] = mat1[0][0];
+        multi[0][1] = mat2[0][1];
+        for(int i=1; i<=mat1[0][0]; i++){
+            for(int j=1; j<=mat2[0][0]; j++){
+                if(mat1[i][1] == mat2[j][0]){}
+                    multi[i][2] = multi[i][2] + (mat1[i][2]*mat2[j][2]);
+                }
+            }
+        }
 
+    else{
+        cout << "matrices cannot be multiplied\n";
+    }
 }
 int main(){
     int r,c,n,matrix1[20][3],matrix2[20][3];
