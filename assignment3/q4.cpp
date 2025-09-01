@@ -46,13 +46,7 @@ int precedence(char &a){
         return 0;
     }
 }
-int main(){
-    stack oper;
-    init(oper);
-    string answer;
-    string input;
-    cout<<"Enter infix\n";
-    getline(cin,input);
+string convert(string &answer, stack &oper, string &input){
     for(int i=0;i<input.length();i++){
         char c = input[i];
         if(c>='0' && c<='9' || isalpha(c)){
@@ -78,6 +72,15 @@ int main(){
     }
     while (!isEmpty(oper)) {
         answer += pop(oper);
-    }
-    cout<<answer<<"\n";
+}
+return answer;
+}
+int main(){
+    stack oper;
+    init(oper);
+    string answer;
+    string input;
+    cout<<"Enter infix\n";
+    getline(cin,input);
+    cout << convert(answer, oper, input);
 }
