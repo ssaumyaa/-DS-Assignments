@@ -73,25 +73,14 @@ void display(que &q, int &n){
 int main(){
     que q;
     init(q);
-    int a;
+    int a; int n;
+    cout << "enter number of elements you want to enqueue\n";
+    cin >> n;
+    for(int i=0; i<n; i++){
     cout << "enter number to be added to queue\n";
     cin >> a;
     enqueue(q, a);
-    cout << "enter number to be added to queue\n";
-    cin >> a;
-    enqueue(q, a);
-    cout << "enter number to be added to queue\n";
-    cin >> a;
-    enqueue(q, a);
-    cout << "enter number to be added to queue\n";
-    cin >> a;
-    enqueue(q, a);
-    cout << "enter number to be added to queue\n";
-    cin >> a;
-    enqueue(q, a);
-    cout << "enter number to be added to queue\n";
-    cin >> a;
-    enqueue(q, a);
+    }
     int N = size(q);
     interleave(q, N);
     display(q, N);
