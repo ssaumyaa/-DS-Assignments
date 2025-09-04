@@ -48,7 +48,7 @@ int peek(que &q){
         return 0;
     }
     else{
-    return q.arr[q.front];
+    return q.arr[q.rear];
     }
 }
 void popStack(que &q1, que &q2){
@@ -61,7 +61,7 @@ void popStack(que &q1, que &q2){
         enqueue(q2, data);
     }
     dequeue(q1);
-    for(int i=q2.front; i<=q2.rear; i++){
+    for(!isEmpty(q2)){
         int data = dequeue(q2);
         enqueue(q1, data);
     }
