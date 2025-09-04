@@ -22,7 +22,7 @@ int size(que &q){
 }
 que enqueue(que &q, int &data){
     if(isFull(q)){
-        cout << "queue is full\n";
+        cout << "stack is full\n";
     }
     else if(isEmpty(q)){
         q.front = q.rear = 0;
@@ -36,7 +36,7 @@ que enqueue(que &q, int &data){
 int dequeue(que &q){
     int item = -1;
     if(isEmpty(q)){
-        cout << "queue is empty\n";
+        cout << "stack is empty\n";
     }
     else{
         item = q.arr[q.front++];
@@ -45,7 +45,8 @@ int dequeue(que &q){
 }
 int peek(que &q){
     if(isEmpty(q)){
-        return 0;
+        cout << "stack is empty\n";
+        return -1;
     }
     else{
     return q.arr[q.rear];
