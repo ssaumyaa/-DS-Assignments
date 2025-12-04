@@ -2,45 +2,40 @@
 using namespace std;
 
 int main() {
-    int m, n;
-    cin >> m >> n;
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> grid(n, vector<int>(m));
 
-    vector<vector<int>> grid(m, vector<int>(n));
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < n; j++)
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
             cin >> grid[i][j];
 
-    vector<vector<int>> dist(m, vector<int>(n, INT_MAX));
-
-    priority_queue<
-        pair<int, pair<int,int>>,
-        vector<pair<int, pair<int,int>>>,
-        greater<pair<int, pair<int,int>>> > pq;
+    vector<vector<int>> dist(n, vector<int>(m, INT_MAX));
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
 
     dist[0][0] = grid[0][0];
-    pq.push({dist[0][0], {0,0}});
+    pq.push({grid[0][0], 0, 0});
 
-    int dr[4] = {1,-1,0,0};
-    int dc[4] = {0,0,1,-1};
+    int dirs[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
 
     while (!pq.empty()) {
-        auto [cost, pos] = pq.top(); pq.pop();
-        int r = pos.first, c = pos.second;
+        auto cur = pq.top(); pq.pop();
+        int cost = cur[0], x = cur[1], y = cur[2];
 
-        if (cost > dist[r][c]) continue;
+        if (x == n-1 && y == m-1) break;
 
-        for (int k = 0; k < 4; k++) {
-            int nr = r + dr[k], nc = c + dc[k];
-            if (nr>=0 && nr<m && nc>=0 && nc<n) {
-                int newCost = cost + grid[nr][nc];
-                if (newCost < dist[nr][nc]) {
-                    dist[nr][nc] = newCost;
-                    pq.push({newCost, {nr,nc}});
+        for (auto &d : dirs) {
+            int nx = x + d[0], ny = y + d[1];
+            if (nx>=0 && ny>=0 && nx<n && ny<m) {
+                int newCost = cost + grid[nx][ny];
+                if (newCost < dist[nx][ny]) {
+                    dist[nx][ny] = newCost;
+                    pq.push({newCost, nx, ny});
                 }
             }
         }
     }
 
-    cout << dist[m-1][n-1];
+    cout << dist[n-1][m-1];
     return 0;
 }
