@@ -6,7 +6,6 @@ int main() {
     cin >> N >> K >> E;
 
     vector<vector<pair<int,int>>> adj(N+1);
-
     for (int i = 0; i < E; i++) {
         int u, v, w;
         cin >> u >> v >> w;
@@ -14,23 +13,19 @@ int main() {
     }
 
     vector<int> dist(N+1, INT_MAX);
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+
     dist[K] = 0;
-
-    priority_queue<pair<int,int>,
-        vector<pair<int,int>>,
-        greater<pair<int,int>>> pq;
-
     pq.push({0, K});
 
     while (!pq.empty()) {
-        auto [d, node] = pq.top(); pq.pop();
-        if (d > dist[node]) continue;
+        auto [d, u] = pq.top(); pq.pop();
 
-        for (auto &edge : adj[node]) {
-            int nxt = edge.first, w = edge.second;
-            if (dist[node] + w < dist[nxt]) {
-                dist[nxt] = dist[node] + w;
-                pq.push({dist[nxt], nxt});
+        for (auto &p : adj[u]) {
+            int v = p.first, w = p.second;
+            if (d + w < dist[v]) {
+                dist[v] = d + w;
+                pq.push({dist[v], v});
             }
         }
     }
