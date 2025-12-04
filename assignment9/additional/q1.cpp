@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int node, vector<vector<int>>& adj, vector<int>& visited) {
-    visited[node] = 1;
-    for (int nxt : adj[node]) {
-        if (!visited[nxt]) dfs(nxt, adj, visited);
-    }
+void dfs(int node, vector<vector<int>>& adj, vector<int>& vis) {
+    vis[node] = 1;
+    for (int x : adj[node])
+        if (!vis[x])
+            dfs(x, adj, vis);
 }
 
 int main() {
@@ -20,13 +20,13 @@ int main() {
         adj[v].push_back(u);
     }
 
-    vector<int> visited(V, 0);
+    vector<int> vis(V, 0);
     int components = 0;
 
     for (int i = 0; i < V; i++) {
-        if (!visited[i]) {
+        if (!vis[i]) {
             components++;
-            dfs(i, adj, visited);
+            dfs(i, adj, vis);
         }
     }
 
