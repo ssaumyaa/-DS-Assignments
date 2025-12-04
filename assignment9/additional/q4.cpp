@@ -1,37 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int r, int c, vector<vector<char>>& grid, int m, int n) {
-    if (r<0 || r>=m || c<0 || c>=n || grid[r][c]=='0') return;
+void dfs(int x, int y, vector<vector<char>>& g, int n, int m) {
+    if (x<0 || y<0 || x>=n || y>=m || g[x][y]=='0') return;
+    g[x][y] = '0';
 
-    grid[r][c] = '0';
-
-    dfs(r+1, c, grid, m, n);
-    dfs(r-1, c, grid, m, n);
-    dfs(r, c+1, grid, m, n);
-    dfs(r, c-1, grid, m, n);
+    dfs(x+1,y,g,n,m);
+    dfs(x-1,y,g,n,m);
+    dfs(x,y+1,g,n,m);
+    dfs(x,y-1,g,n,m);
 }
 
 int main() {
-    int m, n;
-    cin >> m >> n;
+    int n, m;
+    cin >> n >> m;
 
-    vector<vector<char>> grid(m, vector<char>(n));
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < n; j++)
+    vector<vector<char>> grid(n, vector<char>(m));
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
             cin >> grid[i][j];
 
-    int islands = 0;
+    int count = 0;
 
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
             if (grid[i][j] == '1') {
-                islands++;
-                dfs(i, j, grid, m, n);
+                count++;
+                dfs(i, j, grid, n, m);
             }
         }
     }
 
-    cout << islands;
+    cout << count;
     return 0;
 }
